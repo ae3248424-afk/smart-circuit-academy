@@ -45,7 +45,7 @@ export const generateLessons = createServerFn({ method: "POST" })
     try {
       const result = streamText({
         model: provider.responses("openai/gpt-6-astra"),
-        instructions: `You are an expert mechatronics teacher. Turn the provided book content into 4-8 clear beginner-friendly lessons in ${language}. Each lesson: 3-6 numbered simple steps, 2-5 key concepts with short meanings, and 2-3 multiple-choice practice questions (4 options, answerIndex 0-3, short explanation). Base everything on the book content.`,
+        instructions: `You are an expert mechatronics teacher. Turn the provided book content into 4-8 clear beginner-friendly lessons in ${language}. Each lesson: 3-6 simple steps (plain sentences, do not prefix with numbers), 2-5 key concepts with short meanings, and 2-3 multiple-choice practice questions (4 options, answerIndex 0-3, short explanation). Base everything on the book content.`,
         messages: [{ role: "user", content }],
         output: Output.object({ schema: lessonPlanSchema }),
         maxRetries: 0,
