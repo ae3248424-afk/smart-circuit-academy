@@ -41,7 +41,7 @@ const modules = [
 function Lessons() {
   const { t } = useApp();
   const [active, setActive] = useState(0);
-  const m = modules[active];
+  const m = modules[active] ?? modules[0]!;
   return (
     <Section icon={<CircuitBoard />} title={t("الشروحات الشاملة ومحاكي الأردوينو", "Lessons & Arduino Simulator")}
       subtitle={t("اختر وحدة، اقرأ الشرح، وجرّب المحاكاة", "Pick a module, read, and try the simulator")}>

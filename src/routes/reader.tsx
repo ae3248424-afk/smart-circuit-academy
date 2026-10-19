@@ -27,7 +27,7 @@ function toLessons(text: string): Lesson[] {
   for (let i = 0; i < paras.length && lessons.length < 12; i += 3) {
     const chunk = paras.slice(i, i + 3);
     const steps = chunk.flatMap((p) => p.split(/(?<=[.!؟?])\s+/)).filter((s) => s.length > 10).slice(0, 5);
-    const title = chunk[0].split(/\s+/).slice(0, 7).join(" ");
+    const title = (chunk[0] ?? "").split(/\s+/).slice(0, 7).join(" ");
     lessons.push({ title, steps });
   }
   return lessons;
