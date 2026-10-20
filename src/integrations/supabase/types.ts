@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      diploma_attempts: {
+        Row: {
+          correct: number
+          created_at: string
+          id: string
+          learner_name: string
+          level_id: string
+          part_index: number | null
+          score: number
+          total: number
+          user_id: string
+        }
+        Insert: {
+          correct: number
+          created_at?: string
+          id?: string
+          learner_name?: string
+          level_id: string
+          part_index?: number | null
+          score: number
+          total: number
+          user_id?: string
+        }
+        Update: {
+          correct?: number
+          created_at?: string
+          id?: string
+          learner_name?: string
+          level_id?: string
+          part_index?: number | null
+          score?: number
+          total?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
