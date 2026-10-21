@@ -12,6 +12,8 @@ export const Route = createFileRoute("/certificate")({
       { name: "description", content: "Generate your printable mechatronics certificate after passing the final exam." },
       { property: "og:title", content: "Certificate of Completion — Smart Lab" },
       { property: "og:description", content: "Signed by Full-stack Ashraf Elsayed - Smart Lab." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Certificate,

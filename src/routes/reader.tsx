@@ -15,6 +15,8 @@ export const Route = createFileRoute("/reader")({
       { name: "description", content: "Upload a mechatronics book and AI turns it into step-by-step lessons with key concepts and practice questions." },
       { property: "og:title", content: "AI Book Reader — Smart Lab" },
       { property: "og:description", content: "Turn mechatronics books into AI-generated lessons." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Reader,

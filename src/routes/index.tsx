@@ -1,8 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Award, BookOpen, CircuitBoard, Globe, PlayCircle, Trophy } from "lucide-react";
+import { Award, BookOpen, CircuitBoard, Globe, PlayCircle, Trophy, GraduationCap, ArrowUpLeft } from "lucide-react";
 import { useApp } from "@/lib/app-context";
 import { Card } from "@/components/Section";
+import { Button } from "@/components/ui/button";
+import { levels } from "@/lib/diploma";
+import cover from "@/assets/mechatronics-book-cover.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -11,6 +14,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Interactive mechatronics, electronics and Arduino course with quizzes and certificate." },
       { property: "og:title", content: "Smart Lab — Mechatronics Course" },
       { property: "og:description", content: "Learn electronics, sensors, motors and Arduino interactively." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -42,6 +47,15 @@ function Index() {
           <Link to="/quiz" className="glass px-6 py-3 font-bold">{t("الامتحان النهائي", "Final exam")}</Link>
         </div>
       </motion.section>
+      <section className="mb-8 grid gap-6 border-y py-7 md:grid-cols-[150px_1fr]">
+        <Link to="/diploma" className="hidden md:block"><img src={cover.url} alt="الشامل في هندسة الميكاترونكس" className="h-52 w-36 rounded-md object-cover" /></Link>
+        <div className="min-w-0"><p className="mb-2 flex items-center gap-2 text-sm font-bold text-primary"><GraduationCap />{t("دبلومة المعمل الذكي", "Smart Lab diploma")}</p>
+          <h2 className="text-2xl font-extrabold leading-relaxed md:text-3xl"><Link to="/diploma">{t("دبلومة في ميكاترونيكس من الصفر إلى الاحتراف", "Mechatronics diploma: zero to professional")}</Link></h2>
+          <p className="mt-3 text-sm text-muted-foreground">{t("٤ مستويات · ٤ أجزاء لكل مستوى · قراءة واستماع · امتحانات وشهادات", "4 levels · 4 parts per level · reading & listening · exams & certificates")}</p>
+          <div className="mt-5 flex flex-wrap gap-2">{levels.map((level, i) => <Button asChild variant="outline" key={level.id}><Link to="/diploma/$level" params={{ level: level.id }}><span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>{t(level.title, level.english)}<ArrowUpLeft /></Link></Button>)}</div>
+          <div className="mt-4 flex flex-wrap gap-2"><Button asChild><Link to="/diploma"><BookOpen />{t("الدبلومة كاملة", "Full diploma")}</Link></Button><Button asChild variant="ghost"><Link to="/lab"><CircuitBoard />{t("مختبر أردوينو", "Arduino lab")}</Link></Button><Button asChild variant="ghost"><Link to="/diploma/certificates"><Award />{t("شهادات الدبلومة", "Diploma certificates")}</Link></Button></div>
+        </div>
+      </section>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((c, i) => (
           <motion.div key={c.to} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}>

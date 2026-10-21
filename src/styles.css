@@ -41,6 +41,7 @@
   --color-code-fn: var(--code-fn);
   --color-cert: var(--cert);
   --color-cert-ink: var(--cert-ink);
+  --color-lab-board: var(--lab-board);
 }
 
 :root {
@@ -77,6 +78,24 @@
   --grid-line: oklch(0.62 0.15 200 / 8%);
   --glow: oklch(0.62 0.15 200 / 25%);
   --gradient-brand: linear-gradient(120deg, var(--primary), var(--accent));
+  --diploma-teal: oklch(0.48 0.11 178);
+  --diploma-ruby: oklch(0.49 0.17 15);
+  --diploma-cobalt: oklch(0.45 0.14 258);
+  --diploma-gold: oklch(0.55 0.11 80);
+  --certificate-paper: oklch(0.99 0.002 220);
+  --certificate-ink: oklch(0.25 0.02 240);
+  --certificate-muted: oklch(0.47 0.02 240);
+  --certificate-shadow: 0 8px 30px oklch(0.15 0.02 240 / 15%);
+  --lab-board: oklch(0.45 0.1 184);
+  --lab-board-ink: oklch(0.98 0.01 180);
+  --lab-metal: oklch(0.76 0.01 240);
+  --lab-chip: oklch(0.2 0.008 240);
+  --lab-resistor: oklch(0.84 0.07 90);
+  --lab-wire-signal: oklch(0.72 0.19 30);
+  --lab-wire-return: oklch(0.6 0.13 230);
+  --lab-wire-component: oklch(0.7 0.14 155);
+  --lab-led-on: oklch(0.7 0.22 25);
+  --lab-led-off: oklch(0.42 0.075 25);
 }
 
 .dark {
@@ -98,6 +117,10 @@
   --glass: oklch(0.22 0.04 245 / 55%);
   --grid-line: oklch(0.78 0.14 200 / 7%);
   --glow: oklch(0.78 0.14 200 / 20%);
+  --diploma-teal: oklch(0.75 0.13 178);
+  --diploma-ruby: oklch(0.75 0.13 15);
+  --diploma-cobalt: oklch(0.76 0.11 258);
+  --diploma-gold: oklch(0.81 0.14 80);
 }
 
 @layer base {
@@ -132,8 +155,88 @@
   background: var(--gradient-brand);
 }
 
+.level-beginner { --level-color: var(--diploma-teal); }
+.level-intermediate { --level-color: var(--diploma-ruby); }
+.level-advanced { --level-color: var(--diploma-cobalt); }
+.level-expert { --level-color: var(--diploma-gold); }
+.level-number { color: var(--level-color); }
+.level-tile { border-top: 3px solid var(--level-color); }
+.diploma-progress { accent-color: var(--primary); }
+.diploma-progress::-webkit-progress-bar { background: var(--muted); border-radius: 4px; }
+.diploma-progress::-webkit-progress-value { background: var(--primary); border-radius: 4px; }
+.diploma-progress::-moz-progress-bar { background: var(--primary); border-radius: 4px; }
+
+.certificate-viewport, .certificate-preview { width: 100%; max-width: 1120px; margin: 0 auto; }
+.diploma-certificate {
+  position: relative; isolation: isolate; overflow: hidden; width: 100%; aspect-ratio: 1.414;
+  container-type: inline-size; background: var(--certificate-paper); color: var(--certificate-ink);
+  box-shadow: var(--certificate-shadow); --cert-tone: oklch(0.42 0.11 178); --cert-soft: oklch(0.95 0.025 178);
+}
+.cert-beginner { --cert-tone: oklch(0.42 0.11 178); --cert-soft: oklch(0.95 0.025 178); border: 0.6cqw double var(--cert-tone); }
+.cert-intermediate { --cert-tone: oklch(0.43 0.15 15); --cert-soft: oklch(0.96 0.015 15); }
+.cert-advanced { --cert-tone: oklch(0.38 0.12 258); --cert-soft: oklch(0.95 0.018 258); }
+.cert-expert { --cert-tone: oklch(0.49 0.1 80); --cert-soft: oklch(0.97 0.016 80); }
+.cert-artwork { position: absolute; inset: 2.2%; z-index: -1; border: 1px solid var(--cert-tone); }
+.cert-intermediate .cert-artwork { inset: 0; border: none; background: var(--cert-soft); clip-path: polygon(0 0, 100% 0, 100% 9%, 93% 0, 100% 0, 100% 100%, 0 100%, 0 91%, 7% 100%, 0 100%); }
+.cert-intermediate::before, .cert-intermediate::after { content: ''; position: absolute; width: 14%; height: 20%; background: var(--cert-tone); z-index: -1; }
+.cert-intermediate::before { top: 0; right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.cert-intermediate::after { bottom: 0; left: 0; clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.cert-advanced .cert-artwork { inset: 0; border: none; border-inline-start: 3.2cqw solid var(--cert-tone); background-image: repeating-linear-gradient(0deg, transparent, transparent 2.2cqw, color-mix(in oklab, var(--cert-tone) 8%, transparent) 2.2cqw, transparent 2.3cqw); }
+.cert-expert .cert-artwork { inset: 2.2%; border: 0.45cqw double var(--cert-tone); }
+.cert-expert .cert-artwork::before, .cert-expert .cert-artwork::after { content: ''; position: absolute; inset: 1.6%; border: 1px solid var(--cert-tone); }
+.cert-expert .cert-artwork::after { inset: 3.5%; border-color: color-mix(in oklab, var(--cert-tone) 25%, transparent); }
+.cert-inner { height: 100%; min-height: 0; display: flex; flex-direction: column; padding: 5.5% 7%; }
+.cert-header { display: flex; align-items: center; justify-content: space-between; gap: 2%; }
+.cert-brand { font-family: var(--font-mono); color: var(--cert-tone); font-size: 2.1cqw; font-weight: 800; line-height: 1.4; }
+.cert-brand span { display: block; font-size: 0.75cqw; font-weight: 400; }
+.cert-level { color: var(--cert-tone); font-size: 1.15cqw; font-weight: 700; }
+.cert-body { flex: 1; min-height: 0; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.cert-emblem { display: grid; place-items: center; width: 5.8cqw; height: 5.8cqw; background: var(--cert-soft); color: var(--cert-tone); border: 1px solid var(--cert-tone); margin-bottom: 1.2cqw; border-radius: 50%; }
+.cert-emblem svg { width: 3.5cqw; height: 3.5cqw; }
+.cert-intermediate .cert-emblem { border-radius: 0; clip-path: polygon(25% 0,75% 0,100% 25%,100% 75%,75% 100%,25% 100%,0 75%,0 25%); }
+.cert-advanced .cert-emblem { border-radius: 8%; }
+.cert-expert .cert-emblem { border: 0.4cqw double var(--cert-tone); }
+.cert-kicker { font-family: var(--font-mono); font-size: 0.9cqw; color: var(--cert-tone); }
+.cert-body h2 { font-family: 'Amiri', serif; font-size: 5.4cqw; line-height: 1.5; font-weight: 700; }
+.cert-intro { font-size: 1.45cqw; margin-top: 0.6cqw; color: var(--certificate-muted); }
+.cert-name { width: 100%; max-width: 95%; font-family: 'Amiri', serif; font-size: 4cqw; font-weight: 700; line-height: 1.5; min-height: 6cqw; max-height: 12cqw; overflow-wrap: anywhere; color: var(--cert-tone); margin: 0.7cqw 0; }
+.cert-description { font-size: 1.65cqw; line-height: 1.8; max-width: 95%; }
+.cert-diploma { font-size: 1.3cqw; line-height: 1.8; color: var(--certificate-muted); }
+.cert-result { font-size: 1.25cqw; margin-top: 1.1cqw; font-weight: 600; }
+.cert-footer { display: flex; align-items: end; justify-content: space-between; gap: 3%; }
+.cert-signature { color: var(--cert-tone); font-family: 'Amiri', serif; font-style: italic; font-size: 2.3cqw; line-height: 1.4; }
+.cert-signer { border-top: 1px solid var(--cert-tone); padding-top: 0.6cqw; font-size: 1.1cqw; }
+.cert-issue { font-family: var(--font-mono); text-align: end; font-size: 1.15cqw; line-height: 1.8; }
+.cert-disclaimer { margin-top: 1.4cqw; text-align: center; font-size: 0.85cqw; color: var(--certificate-muted); }
+.certificate-preview { pointer-events: none; }
+
+.lab-scene { border: 1px solid var(--border); border-radius: 8px; background: var(--card); overflow: hidden; }
+.lab-scene svg { width: 100%; height: auto; display: block; }
+.lab-board { fill: var(--lab-board); stroke: var(--lab-board-ink); stroke-width: 1; }
+.lab-metal { fill: var(--lab-metal); stroke: var(--lab-chip); }
+.lab-chip { fill: var(--lab-chip); }
+.lab-board-label { fill: var(--lab-board-ink); font: 13px var(--font-mono); }
+.lab-title { font-size: 28px; font-weight: 700; }
+.lab-pin-label { fill: var(--lab-board-ink); font: 10px var(--font-mono); }
+.lab-text { fill: var(--foreground); font: 14px var(--font-mono); }
+.lab-resistor { fill: var(--lab-resistor); stroke: var(--lab-chip); }
+.lab-resistor-band { stroke: var(--lab-chip); stroke-width: 5; }
+.lab-lead { stroke: var(--lab-metal); stroke-width: 3; }
+.lab-led-on { fill: var(--lab-led-on); stroke: var(--lab-led-on); stroke-width: 2; }
+.lab-led-off { fill: var(--lab-led-off); stroke: var(--lab-led-on); stroke-width: 2; }
+.lab-wire { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.wire-0 { stroke: var(--lab-wire-signal); }
+.wire-1 { stroke: var(--lab-wire-component); }
+.wire-2 { stroke: var(--lab-wire-return); }
+.lab-terminal { cursor: pointer; outline: none; }
+.lab-terminal-dot { fill: var(--lab-metal); stroke: var(--lab-chip); stroke-width: 2; }
+.lab-terminal-selected, .lab-terminal:focus .lab-terminal-dot { fill: var(--accent); stroke: var(--accent); stroke-width: 4; }
+.lab-terminal:hover .lab-terminal-dot { fill: var(--primary); }
+
 @media print {
   body * { visibility: hidden; }
   #certificate, #certificate * { visibility: visible; }
   #certificate { position: fixed; inset: 0; margin: 0; }
+  @page { size: A4 landscape; margin: 0; }
+  #certificate.diploma-certificate { width: 297mm; height: 210mm; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 }
