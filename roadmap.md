@@ -5,3 +5,4 @@
 - [ ] Add distinctive downloadable and printable certificates per level and part.
 - [ ] Add interactive Arduino wiring lab and step-by-step experiments.
 - [ ] Add direct home links; verify exams, lab, certificates and mobile layout.
+- [ ] Prepare a clean downloadable ZIP of project source files.

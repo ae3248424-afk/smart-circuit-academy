@@ -6,7 +6,7 @@ describe('Uno experiments', () => {
   it('executes firmware that configures D13 as output and blinks every 500 ms', () => {
     const uno = createUno('blink');
     expect(advanceUno(uno, 100)).toBe(true);
-    expect(uno.cpu.data[0x24] & 0x20).toBe(0x20);
+    expect((uno.cpu.data[0x24] ?? 0) & 0x20).toBe(0x20);
     expect(advanceUno(uno, 8_001_000)).toBe(false);
     expect(advanceUno(uno, 8_001_000)).toBe(true);
   });
