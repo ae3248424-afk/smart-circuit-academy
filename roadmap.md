@@ -1,6 +1,7 @@
 # Smart Lab diploma
-- [ ] Adapt the uploaded book into four levels with four parts each, reading and listening.
-- [ ] Add part exams and 50-question level exams with saved results.
+- [x] Adapt the uploaded book into four levels with four parts each.
+- [ ] Complete level and part pages with reading and listening.
+- [ ] Add part exams and 50-question level exams with results saved on this device.
 - [ ] Add distinctive downloadable and printable certificates per level and part.
 - [ ] Add interactive Arduino wiring lab and step-by-step experiments.
-- [ ] Add levels pages and direct home links; verify exams, lab, certificates and mobile layout.
+- [ ] Add direct home links; verify exams, lab, certificates and mobile layout.
