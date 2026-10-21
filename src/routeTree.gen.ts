@@ -20,9 +20,9 @@ import { Route as ReaderRouteImport } from './routes/reader'
 import { Route as VideosRouteImport } from './routes/videos'
 import { Route as DiplomaLevelRouteImport } from './routes/diploma_.$level'
 import { Route as DiplomaCertificatesRouteImport } from './routes/diploma_.certificates'
-import { Route as DiplomaLevelCertificateExamRouteImport } from './routes/diploma_.$level.certificate.$exam'
-import { Route as DiplomaLevelExamExamRouteImport } from './routes/diploma_.$level.exam.$exam'
-import { Route as DiplomaLevelPartPartRouteImport } from './routes/diploma_.$level.part.$part'
+import { Route as DiplomaLevelCertificateExamRouteImport } from './routes/diploma_.$level_.certificate.$exam'
+import { Route as DiplomaLevelExamExamRouteImport } from './routes/diploma_.$level_.exam.$exam'
+import { Route as DiplomaLevelPartPartRouteImport } from './routes/diploma_.$level_.part.$part'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -81,19 +81,19 @@ const DiplomaCertificatesRoute = DiplomaCertificatesRouteImport.update({
 } as any)
 const DiplomaLevelCertificateExamRoute =
   DiplomaLevelCertificateExamRouteImport.update({
-    id: '/certificate/$exam',
-    path: '/certificate/$exam',
-    getParentRoute: () => DiplomaLevelRoute,
+    id: '/diploma_/$level_/certificate/$exam',
+    path: '/diploma/$level/certificate/$exam',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const DiplomaLevelExamExamRoute = DiplomaLevelExamExamRouteImport.update({
-  id: '/exam/$exam',
-  path: '/exam/$exam',
-  getParentRoute: () => DiplomaLevelRoute,
+  id: '/diploma_/$level_/exam/$exam',
+  path: '/diploma/$level/exam/$exam',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const DiplomaLevelPartPartRoute = DiplomaLevelPartPartRouteImport.update({
-  id: '/part/$part',
-  path: '/part/$part',
-  getParentRoute: () => DiplomaLevelRoute,
+  id: '/diploma_/$level_/part/$part',
+  path: '/diploma/$level/part/$part',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -106,7 +106,7 @@ export interface FileRoutesByFullPath {
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
   '/videos': typeof VideosRoute
-  '/diploma/$level': typeof DiplomaLevelRouteWithChildren
+  '/diploma/$level': typeof DiplomaLevelRoute
   '/diploma/certificates': typeof DiplomaCertificatesRoute
   '/diploma/$level/certificate/$exam': typeof DiplomaLevelCertificateExamRoute
   '/diploma/$level/exam/$exam': typeof DiplomaLevelExamExamRoute
@@ -122,7 +122,7 @@ export interface FileRoutesByTo {
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
   '/videos': typeof VideosRoute
-  '/diploma/$level': typeof DiplomaLevelRouteWithChildren
+  '/diploma/$level': typeof DiplomaLevelRoute
   '/diploma/certificates': typeof DiplomaCertificatesRoute
   '/diploma/$level/certificate/$exam': typeof DiplomaLevelCertificateExamRoute
   '/diploma/$level/exam/$exam': typeof DiplomaLevelExamExamRoute
@@ -139,11 +139,11 @@ export interface FileRoutesById {
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
   '/videos': typeof VideosRoute
-  '/diploma_/$level': typeof DiplomaLevelRouteWithChildren
+  '/diploma_/$level': typeof DiplomaLevelRoute
   '/diploma_/certificates': typeof DiplomaCertificatesRoute
-  '/diploma_/$level/certificate/$exam': typeof DiplomaLevelCertificateExamRoute
-  '/diploma_/$level/exam/$exam': typeof DiplomaLevelExamExamRoute
-  '/diploma_/$level/part/$part': typeof DiplomaLevelPartPartRoute
+  '/diploma_/$level_/certificate/$exam': typeof DiplomaLevelCertificateExamRoute
+  '/diploma_/$level_/exam/$exam': typeof DiplomaLevelExamExamRoute
+  '/diploma_/$level_/part/$part': typeof DiplomaLevelPartPartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -191,9 +191,9 @@ export interface FileRouteTypes {
     | '/videos'
     | '/diploma_/$level'
     | '/diploma_/certificates'
-    | '/diploma_/$level/certificate/$exam'
-    | '/diploma_/$level/exam/$exam'
-    | '/diploma_/$level/part/$part'
+    | '/diploma_/$level_/certificate/$exam'
+    | '/diploma_/$level_/exam/$exam'
+    | '/diploma_/$level_/part/$part'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -206,8 +206,11 @@ export interface RootRouteChildren {
   QuizRoute: typeof QuizRoute
   ReaderRoute: typeof ReaderRoute
   VideosRoute: typeof VideosRoute
-  DiplomaLevelRoute: typeof DiplomaLevelRouteWithChildren
+  DiplomaLevelRoute: typeof DiplomaLevelRoute
   DiplomaCertificatesRoute: typeof DiplomaCertificatesRoute
+  DiplomaLevelCertificateExamRoute: typeof DiplomaLevelCertificateExamRoute
+  DiplomaLevelExamExamRoute: typeof DiplomaLevelExamExamRoute
+  DiplomaLevelPartPartRoute: typeof DiplomaLevelPartPartRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -289,45 +292,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiplomaCertificatesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/diploma_/$level/certificate/$exam': {
-      id: '/diploma_/$level/certificate/$exam'
-      path: '/certificate/$exam'
+    '/diploma_/$level_/certificate/$exam': {
+      id: '/diploma_/$level_/certificate/$exam'
+      path: '/diploma/$level/certificate/$exam'
       fullPath: '/diploma/$level/certificate/$exam'
       preLoaderRoute: typeof DiplomaLevelCertificateExamRouteImport
-      parentRoute: typeof DiplomaLevelRoute
+      parentRoute: typeof rootRouteImport
     }
-    '/diploma_/$level/exam/$exam': {
-      id: '/diploma_/$level/exam/$exam'
-      path: '/exam/$exam'
+    '/diploma_/$level_/exam/$exam': {
+      id: '/diploma_/$level_/exam/$exam'
+      path: '/diploma/$level/exam/$exam'
       fullPath: '/diploma/$level/exam/$exam'
       preLoaderRoute: typeof DiplomaLevelExamExamRouteImport
-      parentRoute: typeof DiplomaLevelRoute
+      parentRoute: typeof rootRouteImport
     }
-    '/diploma_/$level/part/$part': {
-      id: '/diploma_/$level/part/$part'
-      path: '/part/$part'
+    '/diploma_/$level_/part/$part': {
+      id: '/diploma_/$level_/part/$part'
+      path: '/diploma/$level/part/$part'
       fullPath: '/diploma/$level/part/$part'
       preLoaderRoute: typeof DiplomaLevelPartPartRouteImport
-      parentRoute: typeof DiplomaLevelRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface DiplomaLevelRouteChildren {
-  DiplomaLevelCertificateExamRoute: typeof DiplomaLevelCertificateExamRoute
-  DiplomaLevelExamExamRoute: typeof DiplomaLevelExamExamRoute
-  DiplomaLevelPartPartRoute: typeof DiplomaLevelPartPartRoute
-}
-
-const DiplomaLevelRouteChildren: DiplomaLevelRouteChildren = {
-  DiplomaLevelCertificateExamRoute: DiplomaLevelCertificateExamRoute,
-  DiplomaLevelExamExamRoute: DiplomaLevelExamExamRoute,
-  DiplomaLevelPartPartRoute: DiplomaLevelPartPartRoute,
-}
-
-const DiplomaLevelRouteWithChildren = DiplomaLevelRoute._addFileChildren(
-  DiplomaLevelRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -339,8 +326,11 @@ const rootRouteChildren: RootRouteChildren = {
   QuizRoute: QuizRoute,
   ReaderRoute: ReaderRoute,
   VideosRoute: VideosRoute,
-  DiplomaLevelRoute: DiplomaLevelRouteWithChildren,
+  DiplomaLevelRoute: DiplomaLevelRoute,
   DiplomaCertificatesRoute: DiplomaCertificatesRoute,
+  DiplomaLevelCertificateExamRoute: DiplomaLevelCertificateExamRoute,
+  DiplomaLevelExamExamRoute: DiplomaLevelExamExamRoute,
+  DiplomaLevelPartPartRoute: DiplomaLevelPartPartRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
