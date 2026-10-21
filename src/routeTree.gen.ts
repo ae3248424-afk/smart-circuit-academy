@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CertificateRouteImport } from './routes/certificate'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as DiplomaRouteImport } from './routes/diploma'
+import { Route as LabRouteImport } from './routes/lab'
 import { Route as LessonsRouteImport } from './routes/lessons'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as ReaderRouteImport } from './routes/reader'
@@ -41,6 +42,11 @@ const CoursesRoute = CoursesRouteImport.update({
 const DiplomaRoute = DiplomaRouteImport.update({
   id: '/diploma',
   path: '/diploma',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabRoute = LabRouteImport.update({
+  id: '/lab',
+  path: '/lab',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LessonsRoute = LessonsRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/certificate': typeof CertificateRoute
   '/courses': typeof CoursesRoute
   '/diploma': typeof DiplomaRoute
+  '/lab': typeof LabRoute
   '/lessons': typeof LessonsRoute
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/certificate': typeof CertificateRoute
   '/courses': typeof CoursesRoute
   '/diploma': typeof DiplomaRoute
+  '/lab': typeof LabRoute
   '/lessons': typeof LessonsRoute
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/certificate': typeof CertificateRoute
   '/courses': typeof CoursesRoute
   '/diploma': typeof DiplomaRoute
+  '/lab': typeof LabRoute
   '/lessons': typeof LessonsRoute
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/certificate'
     | '/courses'
     | '/diploma'
+    | '/lab'
     | '/lessons'
     | '/quiz'
     | '/reader'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/certificate'
     | '/courses'
     | '/diploma'
+    | '/lab'
     | '/lessons'
     | '/quiz'
     | '/reader'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/certificate'
     | '/courses'
     | '/diploma'
+    | '/lab'
     | '/lessons'
     | '/quiz'
     | '/reader'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   CertificateRoute: typeof CertificateRoute
   CoursesRoute: typeof CoursesRoute
   DiplomaRoute: typeof DiplomaRoute
+  LabRoute: typeof LabRoute
   LessonsRoute: typeof LessonsRoute
   QuizRoute: typeof QuizRoute
   ReaderRoute: typeof ReaderRoute
@@ -225,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: '/diploma'
       fullPath: '/diploma'
       preLoaderRoute: typeof DiplomaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab': {
+      id: '/lab'
+      path: '/lab'
+      fullPath: '/lab'
+      preLoaderRoute: typeof LabRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lessons': {
@@ -314,6 +334,7 @@ const rootRouteChildren: RootRouteChildren = {
   CertificateRoute: CertificateRoute,
   CoursesRoute: CoursesRoute,
   DiplomaRoute: DiplomaRoute,
+  LabRoute: LabRoute,
   LessonsRoute: LessonsRoute,
   QuizRoute: QuizRoute,
   ReaderRoute: ReaderRoute,
