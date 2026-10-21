@@ -9,7 +9,7 @@ import { certificateAttempt, parseExam, useDiplomaProgress } from '@/lib/diploma
 import { pageHead } from '@/lib/page-head';
 import { useApp } from '@/lib/app-context';
 
-export const Route = createFileRoute('/diploma_/$level/certificate/$exam')({
+export const Route = createFileRoute('/diploma_/$level_/certificate/$exam')({
   loader: ({ params }) => { const level = getLevel(params.level); const partIndex = parseExam(params.exam); if (!level || partIndex === undefined) throw notFound(); return { level, partIndex, exam: params.exam }; },
   head: ({ loaderData: d }) => pageHead(d ? `شهادة ${d.partIndex === null ? 'المستوى' : `الجزء ${d.partIndex + 1}`} ${d.level.title}` : 'شهادة غير متاحة', 'شهادة إتمام تعليمية بتوقيع Full-stack Ashraf Elsayed - Smart Lab، قابلة للتنزيل والطباعة.'),
   component: CertificatePage,

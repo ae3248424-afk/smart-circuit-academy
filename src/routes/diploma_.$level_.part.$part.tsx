@@ -8,7 +8,7 @@ import { getLevel } from '@/lib/diploma';
 import { pageHead } from '@/lib/page-head';
 import { useApp } from '@/lib/app-context';
 
-export const Route = createFileRoute('/diploma_/$level/part/$part')({
+export const Route = createFileRoute('/diploma_/$level_/part/$part')({
   loader: ({ params }) => {
     const level = getLevel(params.level);
     const index = /^[1-4]$/.test(params.part) ? Number(params.part) - 1 : -1;

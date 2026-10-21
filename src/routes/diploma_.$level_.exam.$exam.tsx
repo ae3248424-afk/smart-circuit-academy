@@ -8,7 +8,7 @@ import { parseExam, saveAttempt, type DiplomaAttempt } from '@/lib/diploma-progr
 import { pageHead } from '@/lib/page-head';
 import { useApp } from '@/lib/app-context';
 
-export const Route = createFileRoute('/diploma_/$level/exam/$exam')({
+export const Route = createFileRoute('/diploma_/$level_/exam/$exam')({
   loader: ({ params }) => {
     const level = getLevel(params.level); const partIndex = parseExam(params.exam);
     if (!level || partIndex === undefined) throw notFound();
