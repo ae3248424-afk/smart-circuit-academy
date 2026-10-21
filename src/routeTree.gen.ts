@@ -12,10 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CertificateRouteImport } from './routes/certificate'
 import { Route as CoursesRouteImport } from './routes/courses'
+import { Route as DiplomaRouteImport } from './routes/diploma'
 import { Route as LessonsRouteImport } from './routes/lessons'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as ReaderRouteImport } from './routes/reader'
 import { Route as VideosRouteImport } from './routes/videos'
+import { Route as DiplomaLevelRouteImport } from './routes/diploma_.$level'
+import { Route as DiplomaLevelPartPartRouteImport } from './routes/diploma_.$level.part.$part'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,6 +33,11 @@ const CertificateRoute = CertificateRouteImport.update({
 const CoursesRoute = CoursesRouteImport.update({
   id: '/courses',
   path: '/courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiplomaRoute = DiplomaRouteImport.update({
+  id: '/diploma',
+  path: '/diploma',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LessonsRoute = LessonsRouteImport.update({
@@ -52,34 +60,53 @@ const VideosRoute = VideosRouteImport.update({
   path: '/videos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DiplomaLevelRoute = DiplomaLevelRouteImport.update({
+  id: '/diploma_/$level',
+  path: '/diploma/$level',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiplomaLevelPartPartRoute = DiplomaLevelPartPartRouteImport.update({
+  id: '/part/$part',
+  path: '/part/$part',
+  getParentRoute: () => DiplomaLevelRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/certificate': typeof CertificateRoute
   '/courses': typeof CoursesRoute
+  '/diploma': typeof DiplomaRoute
   '/lessons': typeof LessonsRoute
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
   '/videos': typeof VideosRoute
+  '/diploma/$level': typeof DiplomaLevelRouteWithChildren
+  '/diploma/$level/part/$part': typeof DiplomaLevelPartPartRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/certificate': typeof CertificateRoute
   '/courses': typeof CoursesRoute
+  '/diploma': typeof DiplomaRoute
   '/lessons': typeof LessonsRoute
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
   '/videos': typeof VideosRoute
+  '/diploma/$level': typeof DiplomaLevelRouteWithChildren
+  '/diploma/$level/part/$part': typeof DiplomaLevelPartPartRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/certificate': typeof CertificateRoute
   '/courses': typeof CoursesRoute
+  '/diploma': typeof DiplomaRoute
   '/lessons': typeof LessonsRoute
   '/quiz': typeof QuizRoute
   '/reader': typeof ReaderRoute
   '/videos': typeof VideosRoute
+  '/diploma_/$level': typeof DiplomaLevelRouteWithChildren
+  '/diploma_/$level/part/$part': typeof DiplomaLevelPartPartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,38 +114,49 @@ export interface FileRouteTypes {
     | '/'
     | '/certificate'
     | '/courses'
+    | '/diploma'
     | '/lessons'
     | '/quiz'
     | '/reader'
     | '/videos'
+    | '/diploma/$level'
+    | '/diploma/$level/part/$part'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/certificate'
     | '/courses'
+    | '/diploma'
     | '/lessons'
     | '/quiz'
     | '/reader'
     | '/videos'
+    | '/diploma/$level'
+    | '/diploma/$level/part/$part'
   id:
     | '__root__'
     | '/'
     | '/certificate'
     | '/courses'
+    | '/diploma'
     | '/lessons'
     | '/quiz'
     | '/reader'
     | '/videos'
+    | '/diploma_/$level'
+    | '/diploma_/$level/part/$part'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CertificateRoute: typeof CertificateRoute
   CoursesRoute: typeof CoursesRoute
+  DiplomaRoute: typeof DiplomaRoute
   LessonsRoute: typeof LessonsRoute
   QuizRoute: typeof QuizRoute
   ReaderRoute: typeof ReaderRoute
   VideosRoute: typeof VideosRoute
+  DiplomaLevelRoute: typeof DiplomaLevelRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/courses'
       preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diploma': {
+      id: '/diploma'
+      path: '/diploma'
+      fullPath: '/diploma'
+      preLoaderRoute: typeof DiplomaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lessons': {
@@ -172,17 +217,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VideosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/diploma_/$level': {
+      id: '/diploma_/$level'
+      path: '/diploma/$level'
+      fullPath: '/diploma/$level'
+      preLoaderRoute: typeof DiplomaLevelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diploma_/$level/part/$part': {
+      id: '/diploma_/$level/part/$part'
+      path: '/part/$part'
+      fullPath: '/diploma/$level/part/$part'
+      preLoaderRoute: typeof DiplomaLevelPartPartRouteImport
+      parentRoute: typeof DiplomaLevelRoute
+    }
   }
 }
+
+interface DiplomaLevelRouteChildren {
+  DiplomaLevelPartPartRoute: typeof DiplomaLevelPartPartRoute
+}
+
+const DiplomaLevelRouteChildren: DiplomaLevelRouteChildren = {
+  DiplomaLevelPartPartRoute: DiplomaLevelPartPartRoute,
+}
+
+const DiplomaLevelRouteWithChildren = DiplomaLevelRoute._addFileChildren(
+  DiplomaLevelRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CertificateRoute: CertificateRoute,
   CoursesRoute: CoursesRoute,
+  DiplomaRoute: DiplomaRoute,
   LessonsRoute: LessonsRoute,
   QuizRoute: QuizRoute,
   ReaderRoute: ReaderRoute,
   VideosRoute: VideosRoute,
+  DiplomaLevelRoute: DiplomaLevelRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
