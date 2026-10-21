@@ -11,6 +11,8 @@ export const Route = createFileRoute("/videos")({
       { name: "description", content: "Curated YouTube tutorials for hands-on Arduino and mechatronics experiments." },
       { property: "og:title", content: "Video Library — Smart Lab" },
       { property: "og:description", content: "Hands-on mechatronics experiments on video." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Videos,

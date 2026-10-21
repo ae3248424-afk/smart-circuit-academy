@@ -8,11 +8,14 @@ export function Header() {
   const { t, toggleLang, toggleDark, dark, lang } = useApp();
   const [open, setOpen] = useState(false);
   const nav = [
+    { to: "/diploma", label: t("دبلومة الميكاترونكس", "Diploma") },
+    { to: "/lab", label: t("المختبر", "Arduino Lab") },
     { to: "/reader", label: t("قارئ الكتب", "Book Reader") },
     { to: "/lessons", label: t("الشروحات والمحاكاة", "Lessons & Sim") },
     { to: "/videos", label: t("الفيديوهات", "Videos") },
     { to: "/quiz", label: t("الاختبارات", "Quizzes") },
     { to: "/certificate", label: t("الشهادة", "Certificate") },
+    { to: "/diploma/certificates", label: t("شهادات الدبلومة", "Diploma certificates") },
     { to: "/courses", label: t("الكورسات العالمية", "Global Courses") },
   ] as const;
 

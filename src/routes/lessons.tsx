@@ -14,6 +14,8 @@ export const Route = createFileRoute("/lessons")({
       { name: "description", content: "Electronics basics, sensors, motors and Arduino with code and pin diagrams." },
       { property: "og:title", content: "Lessons & Arduino Simulator" },
       { property: "og:description", content: "Interactive mechatronics modules with an Arduino pin simulator." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Lessons,

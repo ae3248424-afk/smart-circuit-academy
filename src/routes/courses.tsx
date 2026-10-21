@@ -10,6 +10,8 @@ export const Route = createFileRoute("/courses")({
       { name: "description", content: "Curated mechatronics and AI courses from Google, Microsoft, MIT and Coursera." },
       { property: "og:title", content: "Global Tech Courses — Smart Lab" },
       { property: "og:description", content: "The best global courses in mechatronics and AI." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Courses,

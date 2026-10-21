@@ -14,4 +14,17 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
+  it.each([
+    ['/diploma/beginner', '/diploma_/$level'],
+    ['/diploma/beginner/part/1', '/diploma_/$level_/part/$part'],
+    ['/diploma/expert/exam/level', '/diploma_/$level_/exam/$exam'],
+    ['/diploma/advanced/certificate/3', '/diploma_/$level_/certificate/$exam'],
+    ['/diploma/certificates', '/diploma_/certificates'],
+    ['/lab', '/lab'],
+  ])('matches independent diploma page %s', (path, id) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    const matches = router.matchRoutes(path);
+    expect(matches.at(-1)?.routeId).toBe(id);
+    expect(matches).toHaveLength(2);
+  });
 });

@@ -14,6 +14,8 @@ export const Route = createFileRoute("/quiz")({
       { name: "description", content: "Multiple-choice and coding challenges with live progress and badges." },
       { property: "og:title", content: "Quizzes & Final Exam — Smart Lab" },
       { property: "og:description", content: "Test your mechatronics knowledge and earn badges." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Quiz,
