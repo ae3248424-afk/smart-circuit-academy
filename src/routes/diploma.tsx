@@ -6,11 +6,10 @@ import { levels } from '@/lib/diploma';
 import { useApp } from '@/lib/app-context';
 import { pageHead } from '@/lib/page-head';
 import { certificateAttempt, useDiplomaProgress } from '@/lib/diploma-progress';
-import cover from '@/assets/mechatronics-book-cover.asset.json';
-import source from '@/assets/mechatronics-source.asset.json';
+import { bookCoverUrl, referenceBookUrl } from '@/lib/book-assets';
 
 export const Route = createFileRoute('/diploma')({
-  head: () => pageHead('دبلومة في ميكاترونيكس من الصفر إلى الاحتراف', 'أربعة مستويات، وستة عشر جزءًا مع القراءة والاستماع واختبارات وشهادات إتمام ومختبر أردوينو.'),
+  head: () => pageHead('دبلومة في ميكاترونيكس من الصفر إلى الاحتراف', 'أربعة مستويات، وستة عشر جزءًا مع القراءة والاستماع واختبارات وشهادات إتمام ومختبر أردوينو.', bookCoverUrl),
   component: Diploma,
 });
 function Diploma() {
@@ -36,8 +35,8 @@ function Diploma() {
       })}
     </section>
     <section className="mt-10 flex items-start gap-5 border-t pt-8">
-      <img src={cover.url} alt="غلاف الشامل في هندسة الميكاترونكس" className="h-36 w-24 shrink-0 rounded-md object-cover" />
-      <div><h2 className="font-bold">{t('المرجع العلمي', 'Source reference')}</h2><p className="mt-2 text-sm">الشامل في هندسة الميكاترونكس — تكنولوجيا العلم المعاصر</p><p className="mt-1 text-sm text-muted-foreground">أ.م. عبدالجبار حسين الظفري</p><p className="mt-3 max-w-2xl text-sm text-muted-foreground">{t('شروح مؤلَّفة مستندة إلى موضوعات الكتاب مع تطبيقات عملية مكملة، وليست نقلًا حرفيًا. شهادة المنصة تعليمية وليست درجة جامعية أو ترخيصًا مهنيًا.', 'Original explanations based on the book’s topics, with supplementary exercises. Smart Lab certificates are educational completion certificates, not academic degrees or professional licenses.')}</p><Button asChild variant="link" className="mt-2 px-0"><a href={source.url} target="_blank" rel="noreferrer"><BookOpen />{t('الكتاب المرجعي PDF', 'Source book PDF')}</a></Button></div>
+      <img src={bookCoverUrl} alt="غلاف الشامل في هندسة الميكاترونكس" className="h-36 w-24 shrink-0 rounded-md object-cover" />
+      <div><h2 className="font-bold">{t('المرجع العلمي', 'Source reference')}</h2><p className="mt-2 text-sm">الشامل في هندسة الميكاترونكس — تكنولوجيا العلم المعاصر</p><p className="mt-1 text-sm text-muted-foreground">أ.م. عبدالجبار حسين الظفري</p><p className="mt-3 max-w-2xl text-sm text-muted-foreground">{t('شروح مؤلَّفة مستندة إلى موضوعات الكتاب مع تطبيقات عملية مكملة، وليست نقلًا حرفيًا. شهادة المنصة تعليمية وليست درجة جامعية أو ترخيصًا مهنيًا.', 'Original explanations based on the book’s topics, with supplementary exercises. Smart Lab certificates are educational completion certificates, not academic degrees or professional licenses.')}</p><Button asChild variant="link" className="mt-2 px-0"><a href={referenceBookUrl} target="_blank" rel="noreferrer"><BookOpen />{t('الكتاب المرجعي PDF', 'Source book PDF')}</a></Button></div>
     </section>
   </main>;
 }

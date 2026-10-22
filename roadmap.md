@@ -6,3 +6,4 @@
 - [x] Add interactive Arduino wiring lab and step-by-step experiments.
 - [x] Add direct home links; verify exams, lab, certificates and mobile layout.
 - [ ] Prepare a clean downloadable ZIP of project source files.
+- [x] Fix reference book and cover URLs for deployment on Vercel; tests and clicked PDF response verified (200). The Vercel deployment still needs the updated source.

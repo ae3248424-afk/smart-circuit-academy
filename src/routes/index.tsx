@@ -5,7 +5,7 @@ import { useApp } from "@/lib/app-context";
 import { Card } from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import { levels } from "@/lib/diploma";
-import cover from "@/assets/mechatronics-book-cover.asset.json";
+import { bookCoverUrl } from "@/lib/book-assets";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,6 +16,8 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Learn electronics, sensors, motors and Arduino interactively." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: bookCoverUrl },
+      { name: "twitter:image", content: bookCoverUrl },
     ],
   }),
   component: Index,
@@ -48,7 +50,7 @@ function Index() {
         </div>
       </motion.section>
       <section className="mb-8 grid gap-6 border-y py-7 md:grid-cols-[150px_1fr]">
-        <Link to="/diploma" className="hidden md:block"><img src={cover.url} alt="الشامل في هندسة الميكاترونكس" className="h-52 w-36 rounded-md object-cover" /></Link>
+        <Link to="/diploma" className="hidden md:block"><img src={bookCoverUrl} alt="الشامل في هندسة الميكاترونكس" className="h-52 w-36 rounded-md object-cover" /></Link>
         <div className="min-w-0"><p className="mb-2 flex items-center gap-2 text-sm font-bold text-primary"><GraduationCap />{t("دبلومة المعمل الذكي", "Smart Lab diploma")}</p>
           <h2 className="text-2xl font-extrabold leading-relaxed md:text-3xl"><Link to="/diploma">{t("دبلومة في ميكاترونيكس من الصفر إلى الاحتراف", "Mechatronics diploma: zero to professional")}</Link></h2>
           <p className="mt-3 text-sm text-muted-foreground">{t("٤ مستويات · ٤ أجزاء لكل مستوى · قراءة واستماع · امتحانات وشهادات", "4 levels · 4 parts per level · reading & listening · exams & certificates")}</p>
