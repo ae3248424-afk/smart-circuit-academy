@@ -15,3 +15,4 @@
 - Keep diploma practice results on the current device, separate from cloud attempts; do not represent local certificates as externally verified qualifications.
 - Use avr8js for the fixed Uno experiment firmware and map interactive terminals to actual ATmega328P pins; do not imply arbitrary Arduino C++ compilation or a physical hardware connection.
 - Certificate exports render the same HTML artwork for PDF, PNG and printing; per-level colors and shapes belong in semantic global style tokens.
+- Resolve book asset pointers through the shared browser-safe book-assets module against the published Lovable origin; relative infrastructure URLs are not served by external hosts such as Vercel.
